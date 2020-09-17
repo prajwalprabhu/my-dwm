@@ -1,86 +1,66 @@
---- config.def.h
-+++ config.def.h
-@@ -95,42 +95,54 @@ unsigned int tabspaces = 8;
+--- config.def.h	2014-02-28 22:21:05.254046315 +0100
++++ config.def.h	2011-12-19 16:02:46.000000000 +0100
+@@ -50,30 +50,30 @@ static const char *dmenucmd[] = { "dmenu
+ static const char *termcmd[]  = { "uxterm", NULL };
  
- /* Terminal colors (16 first used in escape sequence) */
- static const char *colorname[] = {
--	/* 8 normal colors */
--	"black",
--	"red3",
--	"green3",
--	"yellow3",
--	"blue2",
--	"magenta3",
--	"cyan3",
--	"gray90",
--
--	/* 8 bright colors */
--	"gray50",
--	"red",
--	"green",
--	"yellow",
--	"#5c5cff",
--	"magenta",
--	"cyan",
--	"white",
--
--	[255] = 0,
--
--	/* more colors can be added after 255 to use with DefaultXX */
--	"#cccccc",
--	"#555555",
-+	/* solarized dark */
-+	"#073642",  /*  0: black    */
-+	"#dc322f",  /*  1: red      */
-+	"#859900",  /*  2: green    */
-+	"#b58900",  /*  3: yellow   */
-+	"#268bd2",  /*  4: blue     */
-+	"#d33682",  /*  5: magenta  */
-+	"#2aa198",  /*  6: cyan     */
-+	"#eee8d5",  /*  7: white    */
-+	"#002b36",  /*  8: brblack  */
-+	"#cb4b16",  /*  9: brred    */
-+	"#586e75",  /* 10: brgreen  */
-+	"#657b83",  /* 11: bryellow */
-+	"#839496",  /* 12: brblue   */
-+	"#6c71c4",  /* 13: brmagenta*/
-+	"#93a1a1",  /* 14: brcyan   */
-+	"#fdf6e3",  /* 15: brwhite  */
+ static Key keys[] = {
+-	/* type       modifier                      key        function        argument */
+-	{ KeyPress,   MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+-	{ KeyPress,   MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+-	{ KeyPress,   MODKEY,                       XK_b,      togglebar,      {0} },
+-	{ KeyPress,   MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
+-	{ KeyPress,   MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
+-	{ KeyPress,   MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
+-	{ KeyPress,   MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
+-	{ KeyPress,   MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
+-	{ KeyPress,   MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+-	{ KeyPress,   MODKEY,                       XK_Return, zoom,           {0} },
+-	{ KeyPress,   MODKEY,                       XK_Tab,    view,           {0} },
+-	{ KeyPress,   MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
+-	{ KeyPress,   MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
+-	{ KeyPress,   MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
+-	{ KeyPress,   MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+-	{ KeyPress,   MODKEY,                       XK_space,  setlayout,      {0} },
+-	{ KeyPress,   MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
+-	{ KeyPress,   MODKEY,                       XK_0,      view,           {.ui = ~0 } },
+-	{ KeyPress,   MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
+-	{ KeyPress,   MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
+-	{ KeyPress,   MODKEY,                       XK_period, focusmon,       {.i = +1 } },
+-	{ KeyPress,   MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
+-	{ KeyPress,   MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
++	/* modifier                     key        function        argument */
++	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
++	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
++	{ MODKEY,                       XK_b,      togglebar,      {0} },
++	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
++	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
++	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
++	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
++	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
++	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
++	{ MODKEY,                       XK_Return, zoom,           {0} },
++	{ MODKEY,                       XK_Tab,    view,           {0} },
++	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
++	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
++	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
++	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
++	{ MODKEY,                       XK_space,  setlayout,      {0} },
++	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
++	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
++	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
++	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
++	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
++	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
++	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+ 	TAGKEYS(                        XK_1,                      0)
+ 	TAGKEYS(                        XK_2,                      1)
+ 	TAGKEYS(                        XK_3,                      2)
+@@ -83,7 +83,7 @@ static Key keys[] = {
+ 	TAGKEYS(                        XK_7,                      6)
+ 	TAGKEYS(                        XK_8,                      7)
+ 	TAGKEYS(                        XK_9,                      8)
+-	{ KeyPress,   MODKEY|ShiftMask,             XK_q,      quit,           {0} },
++	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
  };
  
-+/* Terminal colors for alternate (light) palette */
-+static const char *altcolorname[] = {
-+	/* solarized light */
-+	"#eee8d5",  /*  0: black    */
-+	"#dc322f",  /*  1: red      */
-+	"#859900",  /*  2: green    */
-+	"#b58900",  /*  3: yellow   */
-+	"#268bd2",  /*  4: blue     */
-+	"#d33682",  /*  5: magenta  */
-+	"#2aa198",  /*  6: cyan     */
-+	"#073642",  /*  7: white    */
-+	"#fdf6e3",  /*  8: brblack  */
-+	"#cb4b16",  /*  9: brred    */
-+	"#93a1a1",  /* 10: brgreen  */
-+	"#839496",  /* 11: bryellow */
-+	"#657b83",  /* 12: brblue   */
-+	"#6c71c4",  /* 13: brmagenta*/
-+	"#586e75",  /* 14: brcyan   */
-+	"#002b36",  /* 15: brwhite  */
-+};
- 
- /*
-  * Default colors (colorname index)
-  * foreground, background, cursor, reverse cursor
-  */
--unsigned int defaultfg = 7;
--unsigned int defaultbg = 0;
--static unsigned int defaultcs = 256;
--static unsigned int defaultrcs = 257;
-+unsigned int defaultfg = 12;
-+unsigned int defaultbg = 8;
-+static unsigned int defaultcs = 14;
-+static unsigned int defaultrcs = 15;
- 
- /*
-  * Default shape of cursor
+ /* button definitions */
