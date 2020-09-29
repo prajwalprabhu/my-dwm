@@ -1,0 +1,5 @@
+#!/bin/sh
+
+vol=$( amixer sget "Master" | awk '/Mono:/ {print $4}')
+echo "$vol"
+

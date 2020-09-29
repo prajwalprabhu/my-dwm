@@ -1,0 +1,27 @@
+#!/bin/bash
+./install.sh
+cd $PWD/dwmblocks/
+pwd
+sudo make install
+cd ..
+pwd
+cd $PWD/script
+./install.sh
+cd ..
+pwd
+sudo cp -i $PWD/linux-logout /usr/bin
+sudo chmod 775 /usr/bin/linux-logout
+sudo mkdir /usr/lib
+sudo cp -i -r $PWD/logout /usr/lib
+echo "
+ ____   ___  _   _ _____
+|  _ \ / _ \| \ | | ____|
+| | | | | | |  \| |  _|
+| |_| | |_| | |\  | |___
+|____/ \___/|_| \_|_____|
+
+"
+echo "Done Installing dwm,dwmblocks,all the scrpits"
+
+
+

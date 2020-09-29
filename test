@@ -1,0 +1,6 @@
+#!/bin/sh
+cwm=$(pwd | grep "/") &
+cd dwmblocks &
+pwd &
+echo "$cwm"
+$cwm/dwmblocks/install.sh
