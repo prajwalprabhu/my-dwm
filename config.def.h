@@ -26,14 +26,6 @@ static const char *colors[][3]      = {
 
 
 static const char *const autostart[] = {
-	"st", NULL,
-	"picom",NULL,
-	"xdman",NULL,
-	"dwmblocks",NULL,
-	"volumeicon",NULL,
-	"clipmenud",NULL,
-	"mocp --server",NULL,
-	"dunst",NULL,
    NULL /* terminate */
 };
 
@@ -49,7 +41,9 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
 	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
-	{ "xdman-Main",NULL,      NULL,       0,            1,           -1}
+	{ "xdman-Main",NULL,      NULL,       0,            1,           -1},
+	{ "Brave-browser",NULL,   NULL,       2,            0,           -1 },
+	{ "St",       NULL,       "gtop",     4,            0,           -1},
 };
 
 /* layout(s) */
@@ -70,9 +64,10 @@ static const Layout layouts[] = {
 	{ ">M>",      centeredfloatingmaster },
  	{ "[@]",      spiral },
  	{ "[\\]",      dwindle },
- 	{ "[@]",      spiral },
- 	{ "[\\]",      dwindle },
 	{  "HHH",      grid },
+	{  "[D]",     deck },
+	{   "[B]",    bstack },
+
 };
 
 /* key definitions */
@@ -102,14 +97,17 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ Alt,       			              XK_Return, togglescratch,  {.v =scratchpadcmd }},
 	{ MODKEY|ShiftMask,		          XK_Return, spawn,          SHCMD("thunar")},
-	{ MODKEY,                       XK_r,      spawn,          SHCMD("st -e ranger")},
-	{ MODKEY,                       XK_Escape, spawn,          SHCMD("st -e bashtop")},
+	{ Alt,                       XK_r,      spawn,          SHCMD("st -e ranger")},
+	{ Alt,                       XK_Escape, spawn,          SHCMD("st -e bashtop")},
 	{ Alt,				                  XK_e,	   spawn,	   SHCMD("dmenuunicode")},
 	{ Alt,				                  XK_c,	   spawn,          SHCMD("clipmenu")},
 	{ Alt,				                  XK_b,	   spawn,          SHCMD("brave")},
 	{ Alt,				                  XK_n,	   spawn,          SHCMD("st -e nmtui")},
+	{ Alt,                          XK_w,    spawn,          SHCMD("mpv /dev/video0") },
+
 	{ MODKEY,			                  XK_z,	   incrgaps,       {.i=+3}},
 	{ MODKEY|ShiftMask,		          XK_z,	   incrgaps,	   {.i=-3}},
+	{ MODKEY|ControlMask,           XK_z,    defaultgaps,   {.i=0 }},
 	{ MODKEY,			                  XK_a,      togglegaps,	   {0}},
 	{ MODKEY,                       XK_Print,  spawn,          SHCMD("gnome-screenshot") } ,
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
@@ -117,19 +115,23 @@ static Key keys[] = {
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1} },
 	{ MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1} },
-	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_i,      incnmaster,     {.i = -1 } },
+	{ MODKEY,                       XK_equal,   incnmaster,     {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_equal,   incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 //	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY,                       XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+	{ MODKEY,                       XK_y,      setlayout,      {.v = &layouts[1]} },
+	{ MODKEY,                       XK_i,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                       XK_u,      setlayout,      {.v = &layouts[3]} },
 	{ MODKEY,                       XK_o,      setlayout,      {.v = &layouts[4]} },
-	{ MODKEY,                       XK_g,      setlayout,      {.v = &layouts[9]} },
+	{ MODKEY,                       XK_p,      setlayout,      {.v = &layouts[5]} },
+	{ MODKEY,                       XK_e,      setlayout,      {.v = &layouts[6]} },
+	{ MODKEY,                       XK_bracketleft,setlayout,  {.v = &layouts[7]} },
+	{ MODKEY,                       XK_bracketright,setlayout, {.v = &layouts[8]} },
+	{ MODKEY,                       XK_r,      setlayout,       {.v=&layouts[9]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_s,      togglesticky,   {0} },
