@@ -1,28 +1,29 @@
-sudo mkdir /usr/bin
-sudo cp -i wifi /usr/bin
-sudo chmod 775 /usr/bin/wifi
-sudo cp -i internet /usr/bin
-sudo chmod 775 /usr/bin/internet
-sudo cp -i nettraf /usr/bin
-sudo chmod 775 /usr/bin/nettraf
-sudo cp -i dmenuunicode /usr/bin
-sudo chmod 775 /usr/bin/dmenuunicode
-sudo cp -i dmenumount /usr/bin
-sudo chmod 775 /usr/bin/dmenumount
-sudo cp -i dmenuumount /usr/bin
-sudo chmod 775 /usr/bin/dmenuumount
-sudo cp -i disk /usr/bin
-sudo chmod 775 /usr/bin/disk
-sudo cp -i battery /usr/bin
-sudo chmod 775 /usr/bin/battery
-sudo cp -i volume /usr/bin
-sudo chmod 775 /usr/bin/volume
-sudo cp -i clock /usr/bin
-sudo chmod 775 /usr/bin/clock
-sudo cp -i memory /usr/bin
-sudo chmod 775 /usr/bin/memory
-sudo cp -i nusage /usr/bin
-sudo chmod 775 /usr/bin/nusage
+dest_dir=/usr/local/bin
+sudo mkdir $dest_dir
+sudo cp -i wifi $dest_dir
+sudo chmod 775 $dest_dir/wifi
+sudo cp -i internet $dest_dir
+sudo chmod 775 $dest_dir/internet
+sudo cp -i nettraf $dest_dir
+sudo chmod 775 $dest_dir/nettraf
+sudo cp -i dmenuunicode $dest_dir
+sudo chmod 775 $dest_dir/dmenuunicode
+sudo cp -i dmenumount $dest_dir
+sudo chmod 775 $dest_dir/dmenumount
+sudo cp -i dmenuumount $dest_dir
+sudo chmod 775 $dest_dir/dmenuumount
+sudo cp -i disk $dest_dir
+sudo chmod 775 $dest_dir/disk
+sudo cp -i battery $dest_dir
+sudo chmod 775 $dest_dir/battery
+sudo cp -i volume $dest_dir
+sudo chmod 775 $dest_dir/volume
+sudo cp -i clock $dest_dir
+sudo chmod 775 $dest_dir/clock
+sudo cp -i memory $dest_dir
+sudo chmod 775 $dest_dir/memory
+sudo cp -i nusage $dest_dir
+sudo chmod 775 $dest_dir/nusage
 echo "Done copying the scripts"
 
 

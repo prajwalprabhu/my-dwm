@@ -98,9 +98,9 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ Alt,       			              XK_Return, togglescratch,  {.v =scratchpadcmd }},
 	{ MODKEY|ShiftMask,		          XK_Return, spawn,          SHCMD("thunar")},
-	{ Alt,                       XK_r,      spawn,          SHCMD("st -e ranger")},
-	{ Alt,                       XK_Escape, spawn,          SHCMD("st -e bashtop")},
-	{ Alt,				                  XK_e,	   spawn,	   SHCMD("dmenuunicode")},
+	{ Alt,                          XK_r,      spawn,          SHCMD("st -e ranger")},
+	{ Alt,                          XK_Escape, spawn,          SHCMD("st -e bashtop")},
+	{ Alt,				                  XK_e,	   spawn,	           SHCMD("dmenuunicode")},
 	{ Alt,				                  XK_c,	   spawn,          SHCMD("clipmenu")},
 	{ Alt,				                  XK_b,	   spawn,          SHCMD("brave")},
 	{ Alt,				                  XK_n,	   spawn,          SHCMD("st -e nmtui")},
@@ -147,6 +147,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_n,      togglealttag,   {0} },
 	{ MODKEY,			                  XK_Page_Up,shiftview,      {.i=+1}},
 	{ MODKEY,			                  XK_Page_Down,shiftview,     {.i=-1}},
+	{ MODKEY,                       XK_g,        shiftview,      {.i=-1} },
+	{ MODKEY,                       XK_semicolon,shiftview,      {.i=+1} },
 	{ 0,                            XF86XK_AudioPrev,spawn,    SHCMD("mocp --previous") },
 	{ 0,                            XF86XK_AudioNext,spawn,    SHCMD("mocp --next") },
 	{ 0,                            XF86XK_AudioPlay,spawn,    SHCMD("mocp --toggle-pause") },
@@ -160,6 +162,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY,             XK_x,      spawn,         SHCMD("arcolinux-logout") },
+
 };
 
 /* button definitions */
