@@ -44,6 +44,7 @@ static const Rule rules[] = {
 	{ "xdman-Main",NULL,      NULL,       0,            1,           -1},
 	{ "Brave-browser",NULL,   NULL,       2,            0,           -1 },
 	{ "St",       NULL,       "gtop",     4,            0,           -1},
+	{ "Brave",NULL,           "Save File",0,            1,           -1 }
 };
 
 /* layout(s) */
@@ -87,7 +88,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
-static const char scratchpadname[] = "scratchpad";
+static const char scratchpadname[] = {"scratchpad"};
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
 
 static const char *layoutmenu_cmd = "layoutmenu.sh";
@@ -98,14 +99,14 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ Alt,       			              XK_Return, togglescratch,  {.v =scratchpadcmd }},
 	{ MODKEY|ShiftMask,		          XK_Return, spawn,          SHCMD("thunar")},
-	{ Alt,                          XK_r,      spawn,          SHCMD("st -e ranger")},
+	{ Alt,                          XK_f,      spawn,          SHCMD("st -e ~/.config/vifm/scripts/vifmrun")},
 	{ Alt,                          XK_Escape, spawn,          SHCMD("st -e bashtop")},
-	{ Alt,				                  XK_e,	   spawn,	           SHCMD("dmenuunicode")},
+	{ Alt|ShiftMask,				                  XK_e,	   spawn,	           SHCMD("dmenuunicode")},
 	{ Alt,				                  XK_c,	   spawn,          SHCMD("clipmenu")},
 	{ Alt,				                  XK_b,	   spawn,          SHCMD("brave")},
 	{ Alt,				                  XK_n,	   spawn,          SHCMD("st -e nmtui")},
 	{ Alt,                          XK_w,    spawn,          SHCMD("mpv /dev/video0") },
-
+  { Alt,                          XK_e,    spawn,          SHCMD("emacsclient -c") },
 	{ MODKEY,			                  XK_z,	   incrgaps,       {.i=+3}},
 	{ MODKEY|ShiftMask,		          XK_z,	   incrgaps,	   {.i=-3}},
 	{ MODKEY|ControlMask,           XK_z,    defaultgaps,   {.i=0 }},
@@ -151,7 +152,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_semicolon,shiftview,      {.i=+1} },
 	{ 0,                            XF86XK_AudioPrev,spawn,    SHCMD("mocp --previous") },
 	{ 0,                            XF86XK_AudioNext,spawn,    SHCMD("mocp --next") },
-	{ 0,                            XF86XK_AudioPlay,spawn,    SHCMD("mocp --toggle-pause") },
+	{ 0,                            XF86XK_AudioPlay,spawn,    SHCMD("playerctl play-pause || mocp --toggle-pause") },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
