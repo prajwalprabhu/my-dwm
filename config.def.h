@@ -23,7 +23,21 @@ static const char *colors[][3]      = {
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
 };
-
+typedef struct {
+	const char *name;
+	const void *cmd;
+} Sp;
+const char *spcmd1[] = {"st", "-n", "spterm", "-g", "120x34", NULL };
+const char *spcmd2[] = {"st", "-n", "spfm", "-g", "144x41", "-e","vifmrun" , NULL };
+const char *spcmd3[] = {"mpv /dev/video0", "-n", "spcam", "-g", "144x41", NULL };
+const char *spcmd4[] = {"st", "-n", "spmus", "-g"  "120x34","-e","mocp",NULL};
+static Sp scratchpads[] = {
+	/* name          cmd  */
+{"spterm",      spcmd1},
+	{"spvifm",    spcmd2},
+	{"cam",   spcmd3},
+	{"mocp",spcmd4},
+};
 
 static const char *const autostart[] = {
    NULL /* terminate */
@@ -44,7 +58,13 @@ static const Rule rules[] = {
 	{ "xdman-Main",NULL,      NULL,       0,            1,           -1},
 	{ "Brave-browser",NULL,   NULL,       2,            0,           -1 },
 	{ "St",       NULL,       "gtop",     4,            0,           -1},
-	{ "Brave",NULL,           "Save File",0,            1,           -1 }
+	{ "Brave",NULL,           "Save File",0,            1,           -1 },
+	{ NULL,		  "spterm",		NULL,		SPTAG(0),		1,			 -1 },
+	{ NULL,		  "spfm",		NULL,		SPTAG(1),		1,			 -1 },
+	{ NULL,		  "spcam",	    NULL,		SPTAG(2),		1,			 -1 },
+	{ NULL,       "spmus",     NULL,       SPTAG(3),       1,           -1 },
+	{ "mpv",      "gl",        "video0 - mpv",0,             1,            -1},
+
 };
 
 /* layout(s) */
@@ -58,10 +78,10 @@ static const int resizehints = 1;    /* 1 means respect size hints in tiled resi
 #include "layouts.c"
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[]=",      tile },    /* first entry is default */
+	{ "|M|",      centeredmaster },    /* first entry is default */
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
-	{ "|M|",      centeredmaster },
+	{ "[]=",      tile },
 	{ ">M>",      centeredfloatingmaster },
  	{ "[@]",      spiral },
  	{ "[\\]",      dwindle },
@@ -88,8 +108,8 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
-static const char scratchpadname[] = {"scratchpad"};
-static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
+/* static const char scratchpadname[] = {"scratchpad"}; */
+/* static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL }; */
 
 static const char *layoutmenu_cmd = "layoutmenu.sh";
 #include<X11/XF86keysym.h>
@@ -97,7 +117,10 @@ static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-	{ Alt,       			              XK_Return, togglescratch,  {.v =scratchpadcmd }},
+	{ Alt,       			              XK_Return, togglescratch,  {.ui = 0}},
+	{ Alt|ShiftMask,                XK_Return, togglescratch,  {.ui = 1} },
+	{ Alt|ShiftMask,              XK_w, togglescratch,  {.ui = 2} },
+	{ Alt,                          XK_m,      togglescratch,  {.ui = 3}},
 	{ MODKEY|ShiftMask,		          XK_Return, spawn,          SHCMD("thunar")},
 	{ Alt,                          XK_f,      spawn,          SHCMD("st -e ~/.config/vifm/scripts/vifmrun")},
 	{ Alt,                          XK_Escape, spawn,          SHCMD("st -e bashtop")},
@@ -107,6 +130,7 @@ static Key keys[] = {
 	{ Alt,				                  XK_n,	   spawn,          SHCMD("st -e nmtui")},
 	{ Alt,                          XK_w,    spawn,          SHCMD("mpv /dev/video0") },
   { Alt,                          XK_e,    spawn,          SHCMD("emacsclient -c") },
+
 	{ MODKEY,			                  XK_z,	   incrgaps,       {.i=+3}},
 	{ MODKEY|ShiftMask,		          XK_z,	   incrgaps,	   {.i=-3}},
 	{ MODKEY|ControlMask,           XK_z,    defaultgaps,   {.i=0 }},
@@ -124,10 +148,10 @@ static Key keys[] = {
 //	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY,                       XK_q,      killclient,     {0} },
-	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
+	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[3]} },
 	{ MODKEY,                       XK_y,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_i,      setlayout,      {.v = &layouts[2]} },
-	{ MODKEY,                       XK_u,      setlayout,      {.v = &layouts[3]} },
+	{ MODKEY,                       XK_u,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_o,      setlayout,      {.v = &layouts[4]} },
 	{ MODKEY,                       XK_p,      setlayout,      {.v = &layouts[5]} },
 	{ MODKEY,                       XK_e,      setlayout,      {.v = &layouts[6]} },
