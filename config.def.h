@@ -10,7 +10,7 @@ static const unsigned int gappiv    = 10;       /* vert inner gap between window
 static const unsigned int gappoh    = 10;       /* horiz outer gap between windows and screen edge */
 static const unsigned int gappov    = 30;       /* vert outer gap between windows and screen edge */
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
-static const int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
+static const int smartgaps          = 0;       /* 1 means no outer gap when there is only one window */
 static const char *fonts[]          = { "monospace:size=10" };
 static const char dmenufont[]       = "monospace:size=10";
 static const char col_gray1[]       = "#222222";
@@ -58,12 +58,14 @@ static const Rule rules[] = {
 	{ "xdman-Main",NULL,      NULL,       0,            1,           -1},
 	{ "Brave-browser",NULL,   NULL,       2,            0,           -1 },
 	{ "St",       NULL,       "gtop",     4,            0,           -1},
-	{ "Brave",NULL,           "Save File",0,            1,           -1 },
+	{ NULL,       NULL,           "Save File",0,            1,           -1 },
 	{ NULL,		  "spterm",		NULL,		SPTAG(0),		1,			 -1 },
 	{ NULL,		  "spfm",		NULL,		SPTAG(1),		1,			 -1 },
 	{ NULL,		  "spcam",	    NULL,		SPTAG(2),		1,			 -1 },
 	{ NULL,       "spmus",     NULL,       SPTAG(3),       1,           -1 },
 	{ "mpv",      "gl",        "video0 - mpv",0,             1,            -1},
+	{  NULL,       NULL,        "Open Folder",0,             1,            -1},
+     { NULL,       NULL,        "Open File", 0,             1,            -1}
 
 };
 
