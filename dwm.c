@@ -252,6 +252,7 @@ static int xerrordummy(Display *dpy, XErrorEvent *ee);
 static int xerrorstart(Display *dpy, XErrorEvent *ee);
 static void zoom(const Arg *arg);
 static void autostart_exec(void);
+static void killunsel(const Arg *arg);
 /* variables */
 static const char autostartblocksh[] = "autostart_blocking.sh";
 static const char autostartsh[] = "autostart.sh";
@@ -1225,6 +1226,29 @@ layoutmenu(const Arg *arg) {
 
 	i = atoi(c);
 	setlayout(&((Arg) { .v = &layouts[i] }));
+}
+
+void
+killunsel(const Arg *arg)
+{
+	Client *i = NULL;
+
+	if (!selmon->sel)
+		return;
+
+	for (i = selmon->clients; i; i = i->next) {
+		if (ISVISIBLE(i) && i != selmon->sel) {
+			if (!sendevent(i, wmatom[WMDelete])) {
+				XGrabServer(dpy);
+				XSetErrorHandler(xerrordummy);
+				XSetCloseDownMode(dpy, DestroyAll);
+				XKillClient(dpy, i->win);
+				XSync(dpy, False);
+				XSetErrorHandler(xerror);
+				XUngrabServer(dpy);
+			}
+		}
+	}
 }
 
 void
