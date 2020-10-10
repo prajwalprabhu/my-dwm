@@ -65,7 +65,8 @@ static const Rule rules[] = {
 	{ NULL,       "spmus",     NULL,       SPTAG(3),       1,           -1 },
 	{ "mpv",      "gl",        "video0 - mpv",0,             1,            -1},
 	{  NULL,       NULL,        "Open Folder",0,             1,            -1},
-     { NULL,       NULL,        "Open File", 0,             1,            -1}
+  { NULL,       NULL,        "Open File", 0,             1,            -1},
+  { NULL,       NULL,        "system_conky",4,          0,             -1 },
 
 };
 
@@ -209,6 +210,7 @@ static Button buttons[] = {
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
 	{ ClkClientWin,         MODKEY|ShiftMask, Button3,      resizemouse,    {.i = 1} },
+	{ ClkClientWin,         MODKEY|ControlMask,Button3,     layoutmenu,      {0} },
 	{ ClkTagBar,            0,              Button1,        view,           {0} },
 	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
