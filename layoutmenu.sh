@@ -1,7 +1,14 @@
 #!/bin/sh
 
 cat <<EOF | xmenu
-[]= Tiled Layout	0
-><> Floating Layout	1
-[M] Monocle Layout	2
+|M|      centeredmaster  0   
+><>      NULL            1
+[M]      monocle         2
+[]=      tile            3
+>M>      centeredfloatingmaster  4 
+[@]      spiral           5
+[\\]     dwindle         6
+HHH      grid            7
+[D]      deck              8
+[B]      bstack           9
 EOF

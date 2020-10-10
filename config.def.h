@@ -29,7 +29,7 @@ typedef struct {
 } Sp;
 const char *spcmd1[] = {"st", "-n", "spterm", "-g", "120x34", NULL };
 const char *spcmd2[] = {"st", "-n", "spfm", "-g", "144x41", "-e","vifmrun" , NULL };
-const char *spcmd3[] = {"mpv /dev/video0", "-n", "spcam", "-g", "144x41", NULL };
+const char *spcmd3[] = {"st", "-n", "spcam", "-g", "144x41","-e","bc", NULL };
 const char *spcmd4[] = {"st", "-n", "spmus", "-g"  "120x34","-e","mocp",NULL};
 static Sp scratchpads[] = {
 	/* name          cmd  */
@@ -103,7 +103,6 @@ static const Layout layouts[] = {
 	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
-/* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
@@ -121,7 +120,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ Alt,       			              XK_Return, togglescratch,  {.ui = 0}},
 	{ Alt|ShiftMask,                XK_Return, togglescratch,  {.ui = 1} },
-	{ Alt|ShiftMask,              XK_w, togglescratch,  {.ui = 2} },
+	{ Alt|ShiftMask,                XK_c,      togglescratch,  {.ui = 2} },
 	{ Alt,                          XK_m,      togglescratch,  {.ui = 3}},
 	{ MODKEY|ShiftMask,		          XK_Return, spawn,          SHCMD("thunar")},
 	{ Alt,                          XK_f,      spawn,          SHCMD("st -e ~/.config/vifm/scripts/vifmrun")},
@@ -178,9 +177,12 @@ static Key keys[] = {
 	{ MODKEY,			                  XK_Page_Down,shiftview,     {.i=-1}},
 	{ MODKEY,                       XK_g,        shiftview,      {.i=-1} },
 	{ MODKEY,                       XK_semicolon,shiftview,      {.i=+1} },
-	{ 0,                            XF86XK_AudioPrev,spawn,    SHCMD("mocp --previous") },
-	{ 0,                            XF86XK_AudioNext,spawn,    SHCMD("mocp --next") },
-	{ 0,                            XF86XK_AudioPlay,spawn,    SHCMD("playerctl play-pause || mocp --toggle-pause") },
+	{ 0,                            XF86XK_AudioPrev,spawn,    SHCMD("mocp --previous && notify-send 'MOCP'$(mocp -Q %title)")},
+	{ 0,                            XF86XK_AudioNext,spawn,    SHCMD("mocp --next && notify-send 'MOCP'$(mocp -Q %title)") },
+	{ 0,                            XF86XK_AudioPlay,spawn,    SHCMD("playerctl play-pause || mocp --toggle-pause && notify-send 'MOCP'$(mocp -Q %title)") },
+	{ 0,                            XF86XK_MonBrightnessUp, spawn, SHCMD("xbacklight +5")},
+	{ 0,                            XF86XK_MonBrightnessDown, spawn, SHCMD("xbacklight -5")},
+	{ MODKEY,                            XK_F1,          spawn,    SHCMD("man -T pdf dwm | zathura -") },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
@@ -190,7 +192,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY,             XK_x,      spawn,         SHCMD("arcolinux-logout") },
+	{ MODKEY,             XK_x,      spawn,         SHCMD("sysact") },
 
 };
 
