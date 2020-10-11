@@ -1,0 +1,7 @@
+*.diff
+*.orig
+*.rej
+/st2
+/surf-2.0
+/tabbed-0.6
+/dwm-6.2
