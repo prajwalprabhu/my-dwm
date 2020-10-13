@@ -1,7 +1,7 @@
-dwm - dynamic window manager
+cdwm - cool dynamic window manager
 ============================
+Heavily patched and costamised build of  dwm
 dwm is an extremely fast, small, and dynamic window manager for X.
-
 
 Requirements
 ------------
@@ -17,7 +17,9 @@ Afterwards enter the following command to build and install dwm (if
 necessary as root):
 
     make clean install
-
+ If you want to install everything ("st","dwmblocks","scrpits for dwmblocks") run :
+-------------------------------------------
+    ./installall
 
 Running dwm
 -----------
@@ -33,16 +35,8 @@ the DISPLAY environment variable is set correctly, e.g.:
 (This will start dwm on display :1 of the host foo.bar.)
 
 In order to display status info in the bar, you can do something
-like this in your .xinitrc:
-
-    while xsetroot -name "`date` `uptime | sed 's/.*,//'`"
-    do
-    	sleep 1
-    done &
-    exec dwm
-
 
 Configuration
 -------------
-The configuration of dwm is done by creating a custom config.h
+The configuration of dwm is done by creating a custom config.def.h
 and (re)compiling the source code.

@@ -10,8 +10,8 @@ with open("config.def.h") as f:
 for i, name in enumerate(data):
     if "keys[]" in name:
         fi = i
-    if "#define" in name and "Mask" in name:
-        modkeys[name[2]]=name[3]
+    # if "#define" in name and "Mask" in name:
+        # modkeys[name[2]]=name[3]
                 
     if fi >= 0 and "};" in name:
         ei = i
@@ -20,8 +20,8 @@ for i in range(fi+1, ei):
     if "//" not in data[i]:
         keys.append(data[i])
 print(modkeys)
-for i in keys:
-    i.replace(modkeys[2],modkeys[3])
+# for i in keys:
+    # i.replace(modkeys[2],modkeys[3])
 
 
 with open("keys.txt", "+w") as f:
