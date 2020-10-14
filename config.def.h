@@ -131,7 +131,7 @@ static Key keys[] = {
 	{ Alt,				                  XK_c,	   spawn,          SHCMD("clipmenu")},
 	{ Alt,				                  XK_b,	   spawn,          SHCMD("brave")},
 	{ Alt,				                  XK_n,	   spawn,          SHCMD("st -e nmtui")},
-	{ Alt,                          XK_w,    spawn,          SHCMD("pkill -f /dev/video0 ||mpv /dev/video0") },
+	{ Alt,                          XK_w,    spawn,          SHCMD("pkill -f /dev/video0 || mpv /dev/video0") },
   { Alt,                          XK_e,    spawn,          SHCMD("emacsclient -c") },
 
 	{ MODKEY,			                  XK_z,	   incrgaps,       {.i=+3}},
