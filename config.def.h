@@ -54,7 +54,8 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "Firefox",  NULL,       NULL,       2,       0,           -1 },
+	{ "Atom",  NULL,       NULL,       5,       0,           -1 },
 	{ "xdman-Main",NULL,      NULL,       0,            1,           -1},
 	{ "Brave-browser",NULL,   NULL,       2,            0,           -1 },
 	{ "St",       NULL,       "gtop",     4,            0,           -1},
@@ -174,12 +175,16 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 	{ MODKEY,                       XK_n,      togglealttag,   {0} },
-	{ MODKEY,			                  XK_Page_Up,shiftview,      {.i=+1}},
+	{ MODKEY,			                  XK_Page_Up, shiftview,      {.i=+1}},
+	{ MODKEY,			                  XK_Right,   shiftview,      {.i=+1}},
 	{ MODKEY,			                  XK_Page_Down,shiftview,     {.i=-1}},
+	{ MODKEY,			                  XK_Left,shiftview,     {.i=-1}},
 	{ MODKEY,                       XK_g,        shiftview,      {.i=-1} },
 	{ MODKEY,                       XK_semicolon,shiftview,      {.i=+1} },
-	{ 0,                            XF86XK_AudioPrev,spawn,    SHCMD("mocp --previous && notify-send 'MOCP' $(printf '%s' $(mocp -Q %file))")},
-	{ 0,                            XF86XK_AudioNext,spawn,    SHCMD("mocp --next && notify-send 'MOCP' $(printf '%s' $(mocp -Q %file))")},
+{ MODKEY|ShiftMask,           XK_q,    spawn,            SHCMD("pkill dwm") },
+	{ MODKEY|ControlMask,           XK_q,    quit,             {.i = 23} },
+	// { 0,                            XF86XK_AudioPrev,spawn,    SHCMD("mocp --previous && notify-send 'MOCP' $(printf '%s' $(mocp -Q %file))")},
+	// { 0,                            XF86XK_AudioNext,spawn,    SHCMD("mocp --next && notify-send 'MOCP' $(printf '%s' $(mocp -Q %file))")},
 	{ 0,                            XF86XK_AudioPlay,spawn,    SHCMD("playerctl play-pause || mocp --toggle-pause "  ) },
 	{ 0,                            XF86XK_MonBrightnessUp, spawn, SHCMD("xbacklight +5")},
 	{ 0,                            XF86XK_MonBrightnessDown, spawn, SHCMD("xbacklight -5")},
@@ -218,4 +223,3 @@ static Button buttons[] = {
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
-

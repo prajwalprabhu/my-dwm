@@ -12,7 +12,7 @@ for i, name in enumerate(data):
         fi = i
     # if "#define" in name and "Mask" in name:
         # modkeys[name[2]]=name[3]
-                
+
     if fi >= 0 and "};" in name:
         ei = i
         break
@@ -28,4 +28,4 @@ with open("keys.txt", "+w") as f:
     for i in keys:
         i = i+"\n"
         f.write(i)
-system("$EDITOR keys.txt")
+# system("$EDITOR keys.txt")
