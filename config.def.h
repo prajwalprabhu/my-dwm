@@ -66,8 +66,8 @@ static const Rule rules[] = {
 	{ NULL,       "spmus",     NULL,       SPTAG(3),       1,           -1 },
 	{ "mpv",      "gl",        "video0 - mpv",0,             1,            -1},
 	{  NULL,       NULL,        "Open Folder",0,             1,            -1},
-  { NULL,       NULL,        "Open File", 0,             1,            -1},
-  { NULL,       NULL,        "system_conky",4,          0,             -1 },
+    { NULL,       NULL,        "Open File", 0,             1,            -1},
+    { NULL,       NULL,        "system_conky",4,          0,             -1 },
 
 };
 
